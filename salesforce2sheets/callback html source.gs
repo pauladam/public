@@ -9,7 +9,7 @@ function callback(){
 	window.close();
 }
 
-var url = "https://script.google.com/a/macros/google.com/s/AKfycbzhLGMoNU13AIbCteeb75KM2v4SQ9nM9yv9vFYHaPJVlrnN2_Y/exec"+window.location.search;
+var url = "https://script.google.com/a/macros/google.com/s/[YOUR SCRIPT EXEC ID]/exec"+window.location.search;
 
 var script = document.createElement('script');
 script.setAttribute('src',url);
