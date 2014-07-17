@@ -5,7 +5,7 @@ var LOG_ON = false;
 // URL of script project (in editor) with /exec (and everything which follows) replaced by /usercallback
 var REDIRECT_URL_USERCALLBACK = 'https://script.google.com/a/google.com/macros/d/[YOUR SCRIPT ID in Editor]/usercallback';
 
-//var REDIRECT_URL = 'https://docs.google.com/a/google.com/uc?authuser=0&id=0B5gvI3GirQtcTXY0LWNJb3BYbFk&export=view';
+//var REDIRECT_URL = 'https://docs.google.com/a/google.com/uc?authuser=0&id=[YOUR REDIRECT HTML DOC ID]&export=view';
 
 var LOG_SPREADSHEET_KEY = '[YOUR LOG SPREADSHEET KEY - ONLY REQUIRED IF LOGGING ON]';
 var DEMO_TRACKING_SPREADSHEET_KEY = '[YOUR USAGE TRACKING SPREADSHEET KEY]';
@@ -17,7 +17,7 @@ var AUTHORIZE_URL = "https://login.salesforce.com/services/oauth2/authorize";
 var TOKEN_URL = "https://login.salesforce.com/services/oauth2/token";
 
 /*
-Not using the callback.html file because it doesn't play well with Add-ons
+Not using the callback.html file in this implementation
 
 // Upload callback.html file to Google Drive in web hosting mode as described here: https://support.google.com/drive/answer/2881970?hl=en
 // Callback file source is in the callback html source.gs
@@ -25,7 +25,7 @@ Not using the callback.html file because it doesn't play well with Add-ons
 // Paste the full redirect URL below into the Salesforce Callback URL (Create -> Apps -> Connected Apps -> API)
 // Don't need to re-version and re-publish after changing this URL
 
-var REDIRECT_URL_EXEC = 'https://script.google.com/a/macros/google.com/s/AKfycbzhLGMoNU13AIbCteeb75KM2v4SQ9nM9yv9vFYHaPJVlrnN2_Y/exec'; 
+var REDIRECT_URL_EXEC = 'https://script.google.com/a/macros/google.com/s/[YOUR EXEC ID]/exec'; 
 */
 
 var DATE = new Date();
