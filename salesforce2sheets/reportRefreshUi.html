@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+<!-- <link rel=stylesheet href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"> -->
+
+<style>
+    #throbber {
+      left: 50%;
+      height: 48px;
+      margin-left: -24px;
+      margin-top: 48px;
+      position: absolute;
+      top: 20%;
+      width: 48px;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script>
+    //add reference to the server side variables and language objects to the client so can use within the javascript
+    $(document).ready(function() {
+      
+      <?if (!isOAuthed()){?>
+        $('#throbber').hide();
+        $('#authsetup').show(); 
+      <?} else {?>
+        $('#authsetup').hide();
+        google.script.run.withSuccessHandler(submissionSucceeded).withFailureHandler(handleError).runReportRefresh();
+      <?}?>
+
+      $('#authlink').click(function(){
+        $('#authsetup').hide();
+        $('#throbber').show();
+        checkForOAuthKey();
+      });
+    });
+
+    function handleError(e){
+     alert(e);
+     submissionSucceeded();
+    }
+
+    function submissionSucceeded(){
+      $('#configForm').show();
+      $('#throbber').hide();
+      google.script.host.close();
+    }
+    
+    var timeoutId = null;
+    function checkForOAuthKey() {
+      //console.log(new Date() + 'checking for OAuth Key');
+      google.script.run.withSuccessHandler(gotOAuthCheckBack).isOAuthed();
+      timeoutId = window.setTimeout(checkForOAuthKey, 3000);
+    }
+
+    function gotOAuthCheckBack(e){
+      //console.log(new Date() + 'Got back ' + e + ' for oauth check');
+      if(e){
+        //console.log(new Date() + 'Clearing timeout');
+        window.clearTimeout(timeoutId);
+        timeoutId = null;
+        //$('#throbber').hide();
+        google.script.run.withSuccessHandler(submissionSucceeded).withFailureHandler(handleError).runReportRefresh();
+        //google.script.host.close();  // gives network onnection error 0, not needed
+      }
+    }
+</script>
+
+
+<img id=throbber src="//ssl.gstatic.com/music/ap/cec6433ac17a57a5ad3264da7b23e565/Spinner_48.gif"
+alt="Loading...">
+
+<img src='https://www.sfdcstatic.com/common/assets/img/logo-company.png' alt="Salesforce logo"/></legend>
+<!-- <legend><img src='https://drive.google.com/a/google.com/?tab=mo#folders/0B5gvI3GirQtcVXNZR0Z5bEJIa3c' alt="Salesforce logo"/></legend> -->
+
+<div id=authsetup>
+    <p class="error left-margin">
+        Please click on the link below to authorize application to Salesforce.com. This page will automatically refresh when you return.
+        <br>
+        <br>
+        <center>
+        <a href='<?=getURLForAuthorization()?>' id=authlink class="action" ><img src="https://googledrive.com/host/0B7eOaxjf0g3YTVR0MVNlak9RX3c/button_authorize_app.png" alt="Authorize App"></a></center>
+    </p>
+</div>
