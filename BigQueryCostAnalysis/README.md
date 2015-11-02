@@ -1,6 +1,6 @@
 Overview
 ========
-This Apps Script Spreadsheets tool retrieves execution and billing info for BigQuery jobs finished in the last 6 months
+This Apps Script Spreadsheets tool retrieves execution and cost info for BigQuery jobs finished in the last 6 months; these costs are estimated based on query size and pricing and may not accurately reflect your billing.
 
 * The user submitting the query must have view access on the project
 
