@@ -21,4 +21,4 @@ Select a range of job rows and select 'Get Job Details' to retrieve the queries 
 
 Deployment
 ==========
-Add this script to a Google Spreadsheet as described [here](https://developers.google.com/apps-script/guides/bound)
+Add this script to a Google Spreadsheet as described [here](https://developers.google.com/apps-script/guides/bound#creating_a_bound_script)
