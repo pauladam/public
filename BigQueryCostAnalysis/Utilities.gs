@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview Contains utility functions
+ */
+
+/**
+ * Get index of column in sheet by column name (ie. header)
+ * @param {array} headerRow Sheet header row in which to search
+ * @param {string} colName Column name to search for
+ * @return {number} Column index or -1 if not found
+ * @private
+ */
 function getColIndexByName_(headerRow,colName) {
   for (i in headerRow[0]) {
     var name = headerRow[0][i];
@@ -24,6 +35,12 @@ function getColIndexByName_(headerRow,colName) {
   return -1;
 }
 
+/**
+ * Display alert as toast
+ * @param {string} message Message to display
+ * @param {string} messageType Message type: "Success", "Warning", "Error"
+ * @private
+ */
 function alert_(message, messageType) {
   
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();

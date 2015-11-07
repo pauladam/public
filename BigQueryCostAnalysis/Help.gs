@@ -15,6 +15,11 @@
  */
 
 /**
+ * @fileoverview Contains functions for displaying Help dialog
+ * Depends on the help.html file
+ */
+
+/**
  * Create help dialog
  * @private
  */

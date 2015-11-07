@@ -14,14 +14,25 @@
  * limitations under the License.
  */
 
+/**
+ * @fileoverview Contains initialization functions
+ */
+
+// Define global constants
+var JOB_ID_COL_NAME = 'Job Id';
+var USER_EMAIL_COL_NAME = 'User Email';
+
 var HEADER_BACKGROUND_GREY = '#F2F3F3';
 var VALUE_BACKGROUND_GREY = '#F5F7FF';
 var TOAST_TIMEOUT_SECONDS = 7
 
+/**
+ * Create menu on spreadsheet open event
+ */
 function onOpen(e) {
   var menu = SpreadsheetApp.getUi().createMenu('BigQuery Log Analysis');
   menu.addItem('List Jobs', 'listJobsUi_')
-  .addItem('Get Job Details', 'getJob_')
+  .addItem('Get Job Details', 'getJobs_')
   .addSeparator()  
   .addItem('Help', 'help_');
   
