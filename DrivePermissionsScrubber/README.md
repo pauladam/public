@@ -1,6 +1,6 @@
 # Google Drive Permissions Scrubber
 
-Ever found out that files or folders are inadvertently shared with a customer?
+Ever found out that files or folders are inadvertently shared with a customer or partner?
 
 Use the Drive permissions scrubber to detect, notify of, and remediate folder and file permissions. 
 - It works along [Forseti](https://github.com/GoogleCloudPlatform/forseti-security) lines by allowing you to define desired sharing policy by folder and domain and then reconciling against this; policy is inherited downwards to match Drive's inheritance.
