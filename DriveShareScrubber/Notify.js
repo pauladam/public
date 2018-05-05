@@ -2,6 +2,11 @@
  * @fileoverview Send notification email
  */
 
+/**
+ * Send notification email 
+ * @param {obj} list of all notifications indexed by file/folder id
+ * @param {string} root folder name: used in email subject and content
+ */
 function notify(notificationObj, rootFolderName) {
   var html = HtmlService.createTemplateFromFile('email');
   html.sharedFolderObj = SHARED_FOLDER_OBJ;

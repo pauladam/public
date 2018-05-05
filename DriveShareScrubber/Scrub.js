@@ -4,6 +4,9 @@
  * Notifies specified email of breaches
  */
 
+/**
+ * Main code
+ */
 function main() {
   var user = Session.getActiveUser().getEmail();
   var hostDomain = user.split('@')[1];
@@ -11,15 +14,19 @@ function main() {
   var folder = DriveApp.getFolderById(ROOT_FOLDER_ID);
   var notificationObj = {};
   
-  folderPermissions_(hostDomain, folder, permittedDomainArr, notificationObj);
+  recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificationObj);
   var rootFolderName = folder.getName();
   notify(notificationObj, rootFolderName);
 }
 
-// recursive rename
-function folderPermissions_(hostDomain, folder, permittedDomainArr, notificationObj) {
-  Logger.log('permittedDomainArr '+JSON.stringify(permittedDomainArr));
-  Logger.log('notificationObj '+JSON.stringify(notificationObj));
+/**
+ * Recursive navigation down the folder hierarchy
+ * @param {string} host domain, ie. the domain from which the script is run; this is considered valid
+ * @param {folder} folder; folder to scan, beginning with root
+ * @param {arr} whitelisted domains
+ * @param {obj} list of all notifications indexed by file/folder id
+ */
+function recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificationObj) {
   
   var file;
   var isFolder;
@@ -57,7 +64,7 @@ function folderPermissions_(hostDomain, folder, permittedDomainArr, notification
     while (folders.hasNext()) {    
       folder = folders.next();
       var branchPermittedDomainArr = (permittedDomainArr.length > 0) ? permittedDomainArr: []; // need one per branch or permissions are accumulated across folders as well as down
-      folderPermissions_(hostDomain, folder, permittedDomainArr, notificationObj);
+      recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificationObj);
     }
   }
   catch (error) {
@@ -66,6 +73,16 @@ function folderPermissions_(hostDomain, folder, permittedDomainArr, notification
 
 }
 
+/**
+ * Validate permissions
+ * @param {string} host domain, ie. the domain from which the script is run; this is considered valid
+ * @param {boolean} whether asset is a file or folder
+ * @param {file or folder} asset
+ * @param {ENUM} 'VIEWER' or 'EDITOR'
+ * @param {arr} users with whom the folder is shared with this permission
+ * @param {arr} whitelisted domains at this folder level
+ * @param {obj} list of all notifications indexed by file/folder id
+ */
 function validatePermissions_(hostDomain, isFolder, fileOrFolder, permissionType, userArr, permittedDomainArr, notificationObj) {
 
   var permissionsArr = [];
@@ -79,6 +96,15 @@ function validatePermissions_(hostDomain, isFolder, fileOrFolder, permissionType
   }
 }
 
+/**
+ * Fix permissions
+ * @param {boolean} whether asset is a file or folder
+ * @param {file or folder} asset
+ * @param {ENUM} 'VIEWER' or 'EDITOR'
+ * @param {user} user whose permission to remove
+ * @param {arr} whitelisted domains at this folder level
+ * @param {obj} list of all notifications indexed by file/folder id
+ */
 function fixPermissions_(isFolder, fileOrFolder, permissionType, user, permittedDomainArr, notificationObj) {
   
   var result = '';
@@ -105,10 +131,20 @@ function fixPermissions_(isFolder, fileOrFolder, permissionType, user, permitted
       }
     }
   }
-  addNotification_(isFolder, fileOrFolder, user, permissionType, permittedDomainArr, notificationObj, result); 
+  addNotification_(isFolder, fileOrFolder, permissionType, user, permittedDomainArr, notificationObj, result); 
 }
 
-function addNotification_(isFolder, fileOrFolder, user, permissionType, permittedDomainArr, notificationObj, result) {
+/**
+ * Add a permissions violation notification 
+ * @param {boolean} whether asset is a file or folder
+ * @param {file or folder} asset
+ * @param {ENUM} 'VIEWER' or 'EDITOR'
+ * @param {user} user whose permission to remove
+ * @param {arr} whitelisted domains at this folder level
+ * @param {obj} list of all notifications indexed by file/folder id
+ * @param {boolean} whether permission removal was successful
+ */
+function addNotification_(isFolder, fileOrFolder, permissionType, user, permittedDomainArr, notificationObj, result) {
   var id;
   var name;
   var url;
