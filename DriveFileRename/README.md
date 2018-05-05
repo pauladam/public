@@ -1,6 +1,6 @@
 # Google Drive File Rename
 
-Have trouble finding customer files because of inconsistent naming?
+Have trouble finding files because of inconsistent naming?
 
 Use the file rename utility to implement and maintain consistent file naming within a folder and all its child folders.
 
