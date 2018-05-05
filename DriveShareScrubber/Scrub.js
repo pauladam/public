@@ -16,7 +16,7 @@ function main() {
   
   recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificationObj);
   var rootFolderName = folder.getName();
-  notify(notificationObj, rootFolderName);
+  notify_(notificationObj, rootFolderName);
 }
 
 /**
@@ -25,6 +25,7 @@ function main() {
  * @param {folder} folder; folder to scan, beginning with root
  * @param {arr} whitelisted domains
  * @param {obj} list of all notifications indexed by file/folder id
+ * @private
  */
 function recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificationObj) {
   
@@ -82,6 +83,7 @@ function recurseOverFolders_(hostDomain, folder, permittedDomainArr, notificatio
  * @param {arr} users with whom the folder is shared with this permission
  * @param {arr} whitelisted domains at this folder level
  * @param {obj} list of all notifications indexed by file/folder id
+ * @private
  */
 function validatePermissions_(hostDomain, isFolder, fileOrFolder, permissionType, userArr, permittedDomainArr, notificationObj) {
 
@@ -104,6 +106,7 @@ function validatePermissions_(hostDomain, isFolder, fileOrFolder, permissionType
  * @param {user} user whose permission to remove
  * @param {arr} whitelisted domains at this folder level
  * @param {obj} list of all notifications indexed by file/folder id
+ * @private
  */
 function fixPermissions_(isFolder, fileOrFolder, permissionType, user, permittedDomainArr, notificationObj) {
   
@@ -143,6 +146,7 @@ function fixPermissions_(isFolder, fileOrFolder, permissionType, user, permitted
  * @param {arr} whitelisted domains at this folder level
  * @param {obj} list of all notifications indexed by file/folder id
  * @param {boolean} whether permission removal was successful
+ * @private
  */
 function addNotification_(isFolder, fileOrFolder, permissionType, user, permittedDomainArr, notificationObj, result) {
   var id;
