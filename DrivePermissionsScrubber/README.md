@@ -1,9 +1,9 @@
-# Google Drive Share Scrubber
+# Google Drive Permissions Scrubber
 
 Ever found out that files or folders are inadvertently shared with a customer?
 
-Use the Drive share scrubber to detect, notify of, and remediate folder and file permissions. 
-- It works along [Forseti](https://github.com/GoogleCloudPlatform/forseti-security) lines by allowing you to define desired sharing policy by folder and domain and then reconciling against this: policy is inherited downwards to match Drive's inheritance.
+Use the Drive permissions scrubber to detect, notify of, and remediate folder and file permissions. 
+- It works along [Forseti](https://github.com/GoogleCloudPlatform/forseti-security) lines by allowing you to define desired sharing policy by folder and domain and then reconciling against this; policy is inherited downwards to match Drive's inheritance.
 - Configuration switches allow you to remove permissions or just notify
 - Please test it for unexpected edge-case behaviours
 
@@ -24,10 +24,10 @@ This project is dependent on the [Google Apps Script](https://developers.google.
 Upload the script with [clasp](https://developers.google.com/apps-script/guides/clasp#upload)
 
 ```
-Configure your folder permissions and switches
+Configure your desired folder permissions and switches
 ```
 ```
-Run the main() function from the Editor to test it.
+Run the  script once from the script editor to authorize it (from the Code file, Run -> Run Functions -> main)
 ```
 ```
 Set an hourly or daily trigger once you're satisfied with its behaviour
