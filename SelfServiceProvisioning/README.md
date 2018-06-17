@@ -10,8 +10,27 @@ The application...
 
 ### Key Concepts
 There are two sets of domains, each with their own scopes (see properties.py)
--- The Docs templates would reside on your main domain
--- The provisioning occurs on the sub-domain corresponding to the customer
+- The Docs templates would reside on your main domain
+- The provisioning occurs on the sub-domain corresponding to the customer
+
+If you just want to test out provisioning, the key code is:
+```
+from googleapiclient import discovery
+from google.oauth2 import service_account
+SCOPES = ("https://www.googleapis.com/auth/admin.directory.group","https://www.googleapis.com/auth/admin.directory.user")
+SUBJECT = '[SERVICE_USER@DOMAIN]'
+
+target_key_file = '[YOUR_KEY_FILE.JSON]'
+credentials = service_account.Credentials.from_service_account_file(target_key_file)
+scoped_credentials = credentials.with_scopes(SCOPES)
+delegated_credentials = scoped_credentials.with_subject(SUBJECT)
+
+admin_client = discovery.build('admin', 'directory_v1', credentials=delegated_credentials)
+req = admin_client.users().list(domain='workshop1.cloud-eval.com')
+resp = req.execute()
+users = resp['users']
+print users
+```
 
 ## Getting Started
 
