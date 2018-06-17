@@ -51,9 +51,6 @@ domain_server_obj = {
 # eg. Any email address listed in the Cloud Platform Console under Email API Authorized Senders
 sendmail_email = "[USER@DOMAIN]"  
 
-# convert downloaded pkcs12 key file to PEM and remove lines before "-----BEGIN PRIVATE KEY-----" if any
-# http://stackoverflow.com/questions/17993604/signedjwtassertioncredentials-on-appengine-doesnt-recognize-pem-key
-target_key_file = "./key/target_key.pem"
 target_key_json = "./key/service_account.json"
 
 # get target service account email address and key through Dev Console -> API Access -> Create Client ID (https://code.google.com/apis/console)
