@@ -1,4 +1,4 @@
-# Google Drive File Rename
+# Google Drive Batch File Rename
 
 Have trouble finding files because of inconsistent naming?
 
